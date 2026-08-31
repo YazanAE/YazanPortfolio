@@ -1,75 +1,50 @@
-# React + TypeScript + Vite
+# Yazan Abdelghani — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio website showcasing my experience, skills, and software projects.
 
-Currently, two official plugins are available:
+## About
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+I'm a Full-Stack .NET Developer with 7+ years of experience building software for real-world businesses.
 
-## React Compiler
+My work focuses on business systems, desktop applications, web applications, database-driven solutions, and custom software designed around practical business workflows.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+* C#
+* .NET
+* ASP.NET Core
+* WPF
+* Windows Forms
+* SQL Server
+* React
+* TypeScript
+* Angular
+* REST APIs
+* Git
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Featured Projects
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+The portfolio includes selected projects covering different business domains, including:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+* Poultry Farm Management
+* Pharmacy Management
+* Fitness Club Management
+* Dental Clinic Management
+* Plant Nursery Management
+* Retail & Commercial Systems
+* Sales & Field Operations
+* Web Applications
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Portfolio
 
-```
+**Live Website:**
+https://yazanae.github.io/YazanPortfolio/
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Contact
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+* GitHub: https://github.com/YazanAE
+* LinkedIn: https://www.linkedin.com/in/%D9%8A%D8%B2%D9%86-%D8%B9%D8%A8%D8%AF-%D8%A7%D9%84%D8%BA%D9%86%D9%8A-967357177/
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
 
-```
+Built with React, TypeScript, and Vite.
