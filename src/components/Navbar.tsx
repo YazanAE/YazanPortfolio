@@ -10,7 +10,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <a href="#hero" className="navbar__logo" onClick={closeMenu}>
-        <img src={`${import.meta.env.BASE_URL}PNG2Logo.svg`} alt="Yazan Abdelghani" />
+        <img src={`${import.meta.env.BASE_URL}PNG2Logo.png`} alt="Yazan Abdelghani" />
       </a>
 
       <div className="navbar__links">
