@@ -1,3 +1,7 @@
+import { useRef, useState } from 'react'
+import poultryImage from '../assets/Poultry.png'
+import DentalImage from '../assets/Dental.png'
+
 function Projects() {
   const projects = [
     {
@@ -8,16 +12,19 @@ function Projects() {
         'A complete management system for poultry farms covering operations, inventory, sales, purchases, financial workflows, and reporting.',
       stack: ['C#', '.NET', 'SQL Server', 'Windows Forms'],
       featured: true,
-     link: 'https://github.com/YazanAE/Deal-Easy-Poultry-Farm-Management-System',
+      image: poultryImage,
+      link:
+        'https://github.com/YazanAE/Deal-Easy-Poultry-Farm-Management-System',
     },
     {
       number: '02',
-      name: 'Rovan',
-      category: 'Pharmacy Management',
+      name: 'Deal Easy Dental',
+      category: 'Dental Clinic Management',
       description:
-        'A business management system designed for pharmacy operations and daily workflow management.',
-      stack: ['C#', '.NET', 'SQL Server'],
+        'A specialized management system designed to organize dental clinic operations, appointments, patients, payments, and daily workflows.',
+      stack: ['C#', 'WPF', 'SQL Server'],
       featured: true,
+      image: DentalImage,
     },
     {
       number: '03',
@@ -38,14 +45,6 @@ function Projects() {
     },
     {
       number: '05',
-      name: 'Deal Easy Dental',
-      category: 'Dental Clinic',
-      description:
-        'A specialized management system for dental clinic operations.',
-      stack: ['C#', 'WPF', 'SQL Server'],
-    },
-    {
-      number: '06',
       name: 'Deal Easy Plant Nursery',
       category: 'Plant Nursery',
       description:
@@ -53,7 +52,7 @@ function Projects() {
       stack: ['C#', 'WPF', 'SQL Server'],
     },
     {
-      number: '07',
+      number: '06',
       name: 'Aser',
       category: 'Debt Collection',
       description:
@@ -61,7 +60,7 @@ function Projects() {
       stack: ['C#', 'SQL Server'],
     },
     {
-      number: '08',
+      number: '07',
       name: 'Al-Zain',
       category: 'Sales Representatives',
       description:
@@ -69,7 +68,7 @@ function Projects() {
       stack: ['C#', 'SQL Server'],
     },
     {
-      number: '09',
+      number: '08',
       name: 'Profit Tracker',
       category: 'Excel Solution',
       description:
@@ -77,7 +76,7 @@ function Projects() {
       stack: ['Excel'],
     },
     {
-      number: '10',
+      number: '09',
       name: 'Hours.ps',
       category: 'Web Application',
       description:
@@ -85,7 +84,7 @@ function Projects() {
       stack: ['Web'],
     },
     {
-      number: '11',
+      number: '10',
       name: 'Job Site',
       category: 'Web Application',
       description:
@@ -93,7 +92,7 @@ function Projects() {
       stack: ['Web'],
     },
     {
-      number: '12',
+      number: '11',
       name: 'Dulcet',
       category: 'Website',
       description:
@@ -101,7 +100,7 @@ function Projects() {
       stack: ['Web'],
     },
     {
-      number: '13',
+      number: '12',
       name: 'AlNajaarPC',
       category: 'Desktop & Mobile',
       description:
@@ -118,24 +117,90 @@ function Projects() {
     (project) => !project.featured
   )
 
+  const sliderRef = useRef<HTMLDivElement>(null)
+  const [currentSlide, setCurrentSlide] = useState(0)
+
+  const scrollSlider = (direction: 'next' | 'prev') => {
+    if (!sliderRef.current) return
+
+    const slider = sliderRef.current
+
+    const card = slider.querySelector(
+      '.project__card'
+    ) as HTMLElement | null
+
+    if (!card) return
+
+    const cardWidth = card.offsetWidth
+    const gap = 24
+    const scrollAmount = cardWidth + gap
+
+    slider.scrollBy({
+      left:
+        direction === 'next'
+          ? scrollAmount
+          : -scrollAmount,
+      behavior: 'smooth',
+    })
+
+    setCurrentSlide((prev) => {
+      if (direction === 'next') {
+        return Math.min(
+          prev + 1,
+          otherProjects.length - 1
+        )
+      }
+
+      return Math.max(prev - 1, 0)
+    })
+  }
+
+  const scrollToSlide = (index: number) => {
+    if (!sliderRef.current) return
+
+    const slider = sliderRef.current
+
+    const card = slider.querySelector(
+      '.project__card'
+    ) as HTMLElement | null
+
+    if (!card) return
+
+    const cardWidth = card.offsetWidth
+    const gap = 24
+
+    slider.scrollTo({
+      left: index * (cardWidth + gap),
+      behavior: 'smooth',
+    })
+
+    setCurrentSlide(index)
+  }
+
   return (
     <section className="projects" id="projects">
       <div className="projects__container">
 
         <div className="projects__header">
           <div>
-            <p className="section__eyebrow">SELECTED WORK</p>
+            <p className="section__eyebrow">
+              SELECTED WORK
+            </p>
 
             <h2 className="projects__title">
-  Software built for <span>real-world</span> businesses
-</h2>
+              Software built for{' '}
+              <span>real-world</span> businesses
+            </h2>
           </div>
 
           <p className="projects__intro">
-            A selection of business systems, applications, and digital
-            solutions developed across different industries.
+            A selection of business systems, applications, and
+            digital solutions developed across different
+            industries.
           </p>
         </div>
+
+        {/* Featured Projects */}
 
         <div className="projects__featured">
           {featuredProjects.map((project) => (
@@ -153,8 +218,18 @@ function Projects() {
                   </div>
 
                   <div className="project__placeholder">
-                    <span>{project.name}</span>
-                    <strong>{project.category}</strong>
+                    {project.image ? (
+                      <img
+                        src={project.image}
+                        alt={`${project.name} - ${project.category}`}
+                        className="project__image"
+                      />
+                    ) : (
+                      <>
+                        <span>{project.name}</span>
+                        <strong>{project.category}</strong>
+                      </>
+                    )}
                   </div>
 
                 </div>
@@ -187,14 +262,16 @@ function Projects() {
                 </div>
 
                 <div className="project__actions">
-                  <a
-  href={project.link}
-  target="_blank"
-  rel="noreferrer"
-  className="project__link"
->
-  View Project →
-</a>
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project__link"
+                    >
+                      View Project →
+                    </a>
+                  )}
                 </div>
 
               </div>
@@ -202,35 +279,86 @@ function Projects() {
           ))}
         </div>
 
-        <div className="projects__grid">
-          {otherProjects.map((project) => (
-            <article
-              className="project__card"
-              key={project.number}
-            >
-              <p className="project__card-number">
-                {project.number}
-              </p>
+        {/* Other Projects Slider */}
 
-              <h3>{project.name}</h3>
+        <div className="projects__slider-wrapper">
 
-              <p className="project__card-category">
-                {project.category}
-              </p>
+          <div className="projects__slider-header">
+            <p className="projects__slider-label">
+              MORE PROJECTS
+            </p>
 
-              <p className="project__card-description">
-                {project.description}
-              </p>
+            <div className="projects__slider-controls">
+              <button
+                type="button"
+                className="projects__slider-button"
+                onClick={() => scrollSlider('prev')}
+                aria-label="Previous projects"
+              >
+                ←
+              </button>
 
-              <div className="project__stack">
-                {project.stack.map((technology) => (
-                  <span key={technology}>
-                    {technology}
-                  </span>
-                ))}
-              </div>
-            </article>
-          ))}
+              <button
+                type="button"
+                className="projects__slider-button"
+                onClick={() => scrollSlider('next')}
+                aria-label="Next projects"
+              >
+                →
+              </button>
+            </div>
+          </div>
+
+          <div
+            className="projects__slider"
+            ref={sliderRef}
+          >
+            {otherProjects.map((project) => (
+              <article
+                className="project__card"
+                key={project.number}
+              >
+                <p className="project__card-number">
+                  {project.number}
+                </p>
+
+                <h3>{project.name}</h3>
+
+                <p className="project__card-category">
+                  {project.category}
+                </p>
+
+                <p className="project__card-description">
+                  {project.description}
+                </p>
+
+                <div className="project__stack">
+                  {project.stack.map((technology) => (
+                    <span key={technology}>
+                      {technology}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="projects__slider-dots">
+            {otherProjects.map((project, index) => (
+              <button
+                type="button"
+                key={project.number}
+                className={
+                  index === currentSlide
+                    ? 'projects__slider-dot active'
+                    : 'projects__slider-dot'
+                }
+                onClick={() => scrollToSlide(index)}
+                aria-label={`Go to project ${project.number}`}
+              />
+            ))}
+          </div>
+
         </div>
 
       </div>
